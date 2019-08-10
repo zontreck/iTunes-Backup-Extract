@@ -5,6 +5,12 @@ The purpose of this program and project is to make a easy to use command line to
 
 With this tool you can easily extract your text messages.
 
+## Getting Started
+
+As you will see when you launch the program, you need a file called "3d0d7e5fb2ce288813306e4d4636395e047a3d28" out of your iOS backup.
+And while it does prompt you to find the 5a file as well, it doesnt actually do anything to that file aside from open it with sqlite. 
+I will be adding in the call log support eventually as well as HTML but for now i was happy i even got the text messages to work so effectively.
+
 ## Build Instructions
 
 Presently this tool is only tested in a linux environment!
