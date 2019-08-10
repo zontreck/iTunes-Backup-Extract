@@ -22,6 +22,9 @@ If you find a bug you can either send in a pull request or open a issue
 
 Same goes for features and such, just open a PR or issue, it'll get looked at.
 
+## Author
+Tara Piccari created this software on 8/10/2019 and this software is licensed under the GPLv2
+
 # FAQ
 
 ## Why free?
