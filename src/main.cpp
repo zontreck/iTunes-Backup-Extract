@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <sqlite3.h>
 #include <sys/stat.h>
+#include "b64.h"
 
 using namespace std;
 
@@ -175,7 +176,8 @@ int main(int argc, char* argv[]){
 	sqlite3_busy_timeout(g_dbCalls, 60000);
 
 	// Perform SMS queries
-	//!-!// This segment sorta chainloads..
+	//!-!// This segment sorta chainloads.. 
+	// DO THE THING!
 	string query = "select * from chat;";
 	sqlite3_stmt *sps_chat;
 	int select_chat = sqlite3_prepare_v2(g_dbSMS, query.c_str(), -1, &sps_chat, NULL);
@@ -205,7 +207,7 @@ int main(int argc, char* argv[]){
 		//cout << Handle << " - "<<Service << " - "<< chat_identifier<<endl;
 		// Build a SQL Query 
 		cout << "Building Message history for "<<chat_identifier<<" ...\r"; // Use \r to ensure that we dont spam the console
-		string get_msg = "select * from message where handle_id='";
+		string get_msg = "select text, is_from_me, datetime(message.date / 1000000000 + 978307200,'unixepoch', 'localtime') as 'conv' from message where handle_id='";
 		get_msg.append(Handle);
 		get_msg.append("';");
 		sqlite3_stmt *sps_msg;
@@ -217,9 +219,29 @@ int main(int argc, char* argv[]){
 		txtDir.append(".txt");
 		output.open(txtDir.c_str());
 
+		string html = sOutSMS;
+		html.append("/html/");
+		html.append(chat_identifier);
+		html.append(".html");
+		ofstream hout;
+		hout.open(html.c_str());
+
+		// Write the HTML template!
+		ifstream templates("template.html");
+		
+		stringstream templateData;
+		while(templates.peek()!=EOF){
+			templateData << (char)templates.get();
+		}
+		hout << templateData.str();
+
+		templates.close();
+
+
 		while(sqlite3_step(sps_msg)==SQLITE_ROW){
 			string text;
 			int is_from_me;
+			string timestamp;
 			int ii;
 			for(ii=0;ii<sqlite3_column_count(sps_msg);ii++){
 				string col = sqlite3_column_name(sps_msg, ii);
@@ -229,17 +251,25 @@ int main(int argc, char* argv[]){
 				if(col.compare("is_from_me")==0){
 					is_from_me=sqlite3_column_int(sps_msg,ii);
 				}
+
+				if(col.compare("conv")==0){
+					timestamp=string(reinterpret_cast<const char*>(sqlite3_column_text(sps_msg,ii)));
+				}
 			}
 
 			// Write to file
 			if(is_from_me ==1){
-				output<<"[ME]: "<<text<<"\n";
+				output<<timestamp<<" [ME]: "<<text<<"\n";
+				hout << "addMsgFromMe('" << base64_encode(text, text.length()) << "', '" << timestamp << "');\n";
 			}else{
 				output << "["<<chat_identifier<<"]: "<< text<<"\n";
+				hout << "addMsgFromThem('" << base64_encode(text, text.length()) << "', '" << timestamp << "');\n";
 			}
 			//TODO: Render as HTML
 		}
 		output.close();
+		hout << "</script></body></html>";
+		hout.close();
 		sqlite3_finalize(sps_msg);
 		iPos++;
 

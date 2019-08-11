@@ -7,9 +7,9 @@ With this tool you can easily extract your text messages.
 
 ## Getting Started
 
-As you will see when you launch the program, you need a file called "3d0d7e5fb2ce288813306e4d4636395e047a3d28" out of your iOS backup.
+As you will see when you launch the program, you need a file called ```3d0d7e5fb2ce288813306e4d4636395e047a3d28``` out of your iOS backup.
 And while it does prompt you to find the 5a file as well, it doesnt actually do anything to that file aside from open it with sqlite. 
-I will be adding in the call log support eventually as well as HTML but for now i was happy i even got the text messages to work so effectively.
+I will be adding in the call log support eventually.
 
 ## Build Instructions
 
@@ -18,8 +18,18 @@ Presently this tool is only tested in a linux environment!
 ```bash
 sudo apt-get install build-essential libsqlite3-dev sqlite3
 cd <project_folder>
+make
+```
+
+For those who enjoy running things line by line:
+```bash
+sudo apt-get install build-essential libsqlite3-dev sqlite3
+cd <project_folder>
+rm *.o
+gcc -c b64.cpp -o b64.o
 gcc -c main.cpp -o main.o
-g++ main.o -o extract_tool -lsqlite3
+g++ b64.o main.o -o extract_tool -lsqlite3
+./extract_tool
 ```
 
 ## Contributing
@@ -36,3 +46,10 @@ Tara Piccari created this software on 8/10/2019 and this software is licensed un
 ## Why free?
 
 Because there were no free alternatives, or even low cost.. to a bunch of paid software that literally just read a SQLite database and spit out your messages and such.. 
+
+
+# TODO
+* Add call_log exporter
+* Add GUI interface
+* Test builds on other environments
+* Create packages to install program
