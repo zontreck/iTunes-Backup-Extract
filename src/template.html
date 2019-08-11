@@ -15,6 +15,13 @@ body {
   align-items: center;
 }
 
+h3 {
+align-items: center;
+left:50%;
+right:50%;
+color:white;
+}
+
 .chat {
   width: 300px;
   border: solid 1px #EEE;
@@ -120,6 +127,9 @@ function addMsgFromMe(msg, timestamp){
 		var newMsg = document.createElement("div");
 		newMsg.classList.add("message");
 		newMsg.innerHTML = msg;
+		var DT = document.createElement("h3");
+		DT.innerHTML = timestamp;
+		msgElements.appendChild(DT);
 		msgElements.appendChild(newMsg);
 		lastElement=msgElements;
 	}else{
@@ -128,6 +138,9 @@ function addMsgFromMe(msg, timestamp){
 		msgElements.classList.add("mine");
 		msgElements.classList.add("messages");
 		msgElements.innerHTML = "<div class='message'>"+msg+"</div>";
+		var DT = document.createElement("h3");
+		DT.innerHTML = timestamp;
+		document.getElementById("chats").appendChild(DT);
 		document.getElementById("chats").appendChild(msgElements);
 		lastElement = msgElements;
 	}
@@ -141,6 +154,9 @@ function addMsgFromThem(msg, timestamp){
 		var newMsg = document.createElement("div");
 		newMsg.classList.add("message");
 		newMsg.innerHTML = msg;
+		var DT = document.createElement("h3");
+		DT.innerHTML = timestamp;
+		msgElements.appendChild(DT);
 		msgElements.appendChild(newMsg);
 		lastElement=msgElements;
 	}else{
@@ -149,6 +165,9 @@ function addMsgFromThem(msg, timestamp){
 		msgElements.classList.add("yours");
 		msgElements.classList.add("messages");
 		msgElements.innerHTML = "<div class='message'>"+msg+"</div>";
+		var DT = document.createElement("h3");
+		DT.innerHTML = timestamp;
+		document.getElementById("chats").appendChild(DT);
 		document.getElementById("chats").appendChild(msgElements);
 		lastElement=msgElements;
 	}
