@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <SignAssembly>false</SignAssembly>
+        <StartupObject>ExtractTool.MainProgram</StartupObject>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <DebugType>embedded</DebugType>
+      <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+    <ItemGroup>
+      <PackageReference Include="Figgle" Version="0.3.0" />
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="3.1.2" />
+      <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="3.1.2" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Update="template.html">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+</Project>

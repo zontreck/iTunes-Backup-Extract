@@ -1,4 +1,4 @@
-# ZNI Extract v1
+# ZNI Extract v1.2
 ## Purpose
 
 The purpose of this program and project is to make a easy to use command line tool, and perhaps eventually a GUI to extract data from a iTunes unencrypted backup for FREE.
@@ -14,6 +14,9 @@ I will be adding in the call log support eventually.
 ## Build Instructions
 
 Presently this tool is only tested in a linux environment!
+
+<details>
+<summary>Original C++ Build</summary>
 
 ```bash
 sudo apt-get install build-essential libsqlite3-dev sqlite3
@@ -31,6 +34,20 @@ gcc -c main.cpp -o main.o
 g++ b64.o main.o -o extract_tool -lsqlite3
 ./extract_tool
 ```
+
+</details>
+
+<details>
+<summary>New .NetCore instructions</summary>
+
+```
+dotnet restore
+dotnet build -c Release
+```
+
+Build files can then be found in the bin folder.
+
+</details>
 
 ## Contributing
 
