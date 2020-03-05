@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+
+    Author: Tara Piccari
+    Date: 3/4/2020
+    Copyright: 2020 Tara Piccari / zontreck.dev
+
+        Licensed under the AGPLv3
+
+
+*/
+
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.Data.Sqlite;
@@ -185,7 +197,7 @@ namespace ExtractTool
 
             reader.Read();
             con.Close();
-            Console.WriteLine("* Database closed\n\nPress any key to exit.\n-> PROGRAM COMPLETE <-");
+            Console.WriteLine("* Database closed\n\nPress any key to exit.\n-> PROGRAM COMPLETE <-\n\nI hope you found this program useful! Remember that if you paid for this program, you got scammed!\nYou can find the code for this program and the latest builds at https://github.com/zontreck/iTunes-Backup-Extract\nIf you find this program useful, consider donating! tarapiccari@gmail.com : paypal");
             Console.ReadKey();
         }
 
