@@ -17,13 +17,9 @@ jobs:
         dotnet-version: 3.1.000
       if: matrix.os == 'maxOS.latest' || matrix.os == 'ubuntu-latest'
     - name: Restore Dependencies
-      run: dotnet restore
-      with:
-        path: netcore_all_src
+      run: cd netcore_all_src; dotnet restore
     - name: Build
-      run: dotnet build --configuration Release
-      with:
-        path: netcore_all_src
+      run: cd netcore_all_src; dotnet build --configuration Release
     - name: Upload Artifact
       uses: actions/upload-artifact@v1.0.0
       with:
