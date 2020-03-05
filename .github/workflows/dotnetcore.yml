@@ -12,9 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Setup .Net
-      uses: actions/setup-dotnet@1.2.0
+      uses: actions/setup-dotnet@1.4.0
       with: 
-        dotnet-version: 3.1.000
+        dotnet-version: 3.1.100
       if: matrix.os == 'maxOS.latest' || matrix.os == 'ubuntu-latest'
     - name: Restore Dependencies
       run: cd netcore_all_src; dotnet restore
